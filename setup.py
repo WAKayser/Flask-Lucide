@@ -7,13 +7,13 @@ from setuptools.command.build_py import build_py
 
 
 class BuildIconsCommand(build_py):
-    """Custom Build Icons Command
-    """
+    """Custom Build Icons Command."""
+
     def run(self):
         # First copy all files
         super(BuildIconsCommand, self).run()
-        build_file = path.join('build', 'lib', 'flask_feather','icons.py')
-        icon_dir = path.join('feather', 'icons')
+        build_file = path.join('build', 'lib', 'flask_lucide', 'icons.py')
+        icon_dir = path.join('lucide', 'icons')
         files = [f for f in os.listdir(icon_dir)
                  if path.isfile(path.join(icon_dir, f))]
         with open(build_file, 'w') as icons:
@@ -22,6 +22,9 @@ class BuildIconsCommand(build_py):
                 icon_name = str(file.split('.')[0]).replace('-', '_')
                 with open(path.join(icon_dir, file), 'r') as icon:
                     svg = icon.read()
+
+                if icon_name == 'import':
+                    icon_name = 'import_icon'
                 # Modify the svg, remove line and spaces
                 svg = re.sub(r'\n', r' ', svg)
                 svg = re.sub(r'\s+', r' ', svg)
@@ -41,17 +44,17 @@ install_requires = [
 testing_extras = []
 
 setup(
-    name='flask-feather',
+    name='flask-lucide',
     version='0.1.0',
-    author='Tom Vos',
-    author_email='tjvos1@gmail.com',
+    author='Wouter Kayser',
+    author_email='wouterkayser@gmail.com',
     cmdclass={
         'build_py': BuildIconsCommand
     },
-    description='A simple Tag to implement Feather Icons in Flask',
+    description='A simple Tag to implement Lucide Icons in Flask',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/thetomcat/flask-feather',
+    url='https://github.com/WAKayser/flask-lucide',
     # py_modules=["flask_feather"],
     package_dir= {'':'src'},
     packages=find_packages(where='src'),
@@ -69,7 +72,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         "Operating System :: OS Independent",
     ]
 )
-

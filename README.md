@@ -1,17 +1,16 @@
-# Flask Feather
+# Flask Lucide
 
-[![Build Status](https://travis-ci.com/TheTomcat/Flask-Feather.svg?branch=main)](https://travis-ci.com/TheTomcat/Flask-Feather)
-![GitHub](https://img.shields.io/github/license/TheTomcat/Flask-Feather)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/flask-feather)
 
-A simple Tag (`{% icon "name" %}`) to implement [Feather Icons](https://feathericons.com) in Flask. This is largely based of the library [django_feather](https://github.com/jnsdrtlf/django-feather) by [Jonas Drotleff](https://github.com/jnsdrtlf/).
+A simple Tag (`{% icon "name" %}`) to implement [Lucide Icons](https://lucide.dev) in Flask. 
+This is completely copied of the library [Flask Feather](https://github.com/thetomcat/flask-feather) by TheTomcat
+This is largely based of the library [django_feather](https://github.com/jnsdrtlf/django-feather) by [Jonas Drotleff](https://github.com/jnsdrtlf/).
 
 ## Install
 
-Install `flask-feather` using `pip`.
+Install `flask-lucide` using `pip`.
 
 ```bash
-pip install flask-feather
+pip install flask-lucide
 ```  
 
 ## Quick Start
@@ -54,20 +53,20 @@ def create_app(config):
 It's pretty simple to use this package. From within a jinja template:
 
 ```html
-<p>{{ feather.icon('icon-name', width=32, height=32) }}</p>
+<p>{{ lucide.icon('icon-name', width=32, height=32) }}</p>
 ```
 
 If the property you're modifying has a hyphen, use an underscore instead. You can refer to icon names with either hyphens or underscores.
 
 ```html
-<p>{{ feather.icon('icon-name', stroke_width=2) }}</p>
+<p>{{ lucide.icon('icon-name', stroke_width=2) }}</p>
 ```
 
 The `icon` function takes the SVG source from the Feather project, applies additional attributes and return the SVG tag.
 
 ## Performance
 
-`flask-feather` borrows the application structure from `django-feather` and does not read the `.svg`
+`flask-lucide` borrows the application structure from `django-feather` and does not read the `.svg`
 files each time an icon is rendered. Instead, on installation, all the icons are written to a `.py` file.
 All icons are rendered on the server side, avoiding the need to call `feather.replace()` after the page has loaded.
 
@@ -75,9 +74,10 @@ Any custom icons are parsed each time the server is restarted, and not every tim
 
 ## License
 
-Feather is licensed under the [MIT License](https://github.com/colebemis/feather/blob/master/LICENSE).
+Lucide is licensed under the [ISC License](https://github.com/lucide-icons/lucide/blob/master/LICENSE).
 
-`flask-feather` is a derivative work of `django-feather`, both of which are licensed under the Apache License, Version 2.0:
+`flask-lucide` is a derivative work of `flask-feather` and `django-feather`,  are licensed under the Apache License, Version 2.0:
+
 
 ```license
     Modifications Copyright 2020 Tom Vos <tjvos1@gmail.com>
