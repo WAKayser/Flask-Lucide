@@ -1,12 +1,12 @@
 from flask import current_app
-from jinja2 import Markup
+from markupsafe import Markup
 from xml.dom import minidom
 import io
 import os
 from os import path
 import re
 
-from . import icons
+from .icons import i as icons
 
 
 class Lucide(object):
@@ -28,7 +28,8 @@ class Lucide(object):
                 svg = re.sub(r'\n', r' ', svg)
                 svg = re.sub(r'\s+', r' ', svg)
                 svg = svg.replace('> <', '><').replace(' />', '/>')
-                setattr(icons, icon_name, svg)
+                svg = ('><').join(svg.split('><')[1:-1])
+                icons[icon_name] = svg
 
     def init_app(self, app):
         if not hasattr(app, 'extensions'):
@@ -55,7 +56,18 @@ class _lucide(object):
         icon_name = icon_name.replace('-', '_')
         if not icon_name:
             return ''
-        doc = minidom.parseString(getattr(icons, icon_name))
+
+        start = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\""\
+                " height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke="\
+                "\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\""\
+                " stroke-linejoin=\"round\" ><"
+
+        end = "></svg>"
+
+        svg = start + icons[icon_name] + end
+        print(svg)
+
+        doc = minidom.parseString(svg)
         for attr, val in kwargs.items():
             attr = attr.replace('_', '-')
             doc.documentElement.setAttribute(attr, str(val))

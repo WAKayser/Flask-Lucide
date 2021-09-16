@@ -11,6 +11,7 @@ class BuildIconsCommand(build_py):
 
     def run(self):
         # First copy all files
+        print("Running svg reader.")
         super(BuildIconsCommand, self).run()
         build_file = path.join('build', 'lib', 'flask_lucide', 'icons.py')
         icon_dir = path.join('lucide', 'icons')
@@ -18,19 +19,20 @@ class BuildIconsCommand(build_py):
                  if path.isfile(path.join(icon_dir, f))]
         with open(build_file, 'w') as icons:
             # Open the build file once, then iterate over all icons
+            icons.write('i = {')
             for file in files:
                 icon_name = str(file.split('.')[0]).replace('-', '_')
                 with open(path.join(icon_dir, file), 'r') as icon:
                     svg = icon.read()
 
-                if icon_name == 'import':
-                    icon_name = 'import_icon'
                 # Modify the svg, remove line and spaces
                 svg = re.sub(r'\n', r' ', svg)
                 svg = re.sub(r'\s+', r' ', svg)
                 svg = svg.replace('> <', '><').replace(' />', '/>')
+                svg = ('><').join(svg.split('><')[1:-1])
                 # Add to the build file
-                icons.write("%s = \'%s\'%s" % (icon_name, svg, os.linesep))
+                icons.write("     \'%s\': \'%s\'\n," % (icon_name, svg))
+            icons.write('     }')
 
 
 with open("README.md", "r") as fh:
@@ -45,7 +47,7 @@ testing_extras = []
 
 setup(
     name='flask-lucide',
-    version='0.1.0',
+    version='0.1.2',
     author='Wouter Kayser',
     author_email='wouterkayser@gmail.com',
     cmdclass={

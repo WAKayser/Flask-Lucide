@@ -3,7 +3,7 @@ from flask_lucide import Lucide, icons
 from os import path
 
 app = Flask(__name__)
-lucide = Lucide(app)
+lucide = Lucide(app, import_dir=path.join('test', 'customsvg'))
 
 
 def test_simple():
@@ -26,6 +26,7 @@ def test_mod_attr():
 
 
 def test_custom_import():
-    app = Flask(__name__)
-    feather = Lucide(app, import_dir=path.join('test', 'customsvg'))
-    assert getattr(icons, 'menu_close') is not None
+    with app.app_context():
+        icon = render_template_string("{{ lucide.icon('menu-close') }}")
+        assert '<svg ' in icon
+        assert '</svg>' in icon
