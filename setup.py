@@ -47,7 +47,7 @@ testing_extras = []
 
 setup(
     name='flask-lucide',
-    version='0.1.2',
+    version='0.1.3',
     author='Wouter Kayser',
     author_email='wouterkayser@gmail.com',
     cmdclass={

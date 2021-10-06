@@ -5,6 +5,6 @@ __url__ = 'https://github.com/WAKayser/Flask-Lucide'
 __info__ = 'Insert lucide icons into jinja2 templates'
 __author__ = 'Wouter Kayser'
 __email__ = 'wouterkayser@gmail.com'
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 from .extension import Lucide
