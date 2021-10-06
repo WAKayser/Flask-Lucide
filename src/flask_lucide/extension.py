@@ -65,7 +65,6 @@ class _lucide(object):
         end = "></svg>"
 
         svg = start + icons[icon_name] + end
-        print(svg)
 
         doc = minidom.parseString(svg)
         for attr, val in kwargs.items():
