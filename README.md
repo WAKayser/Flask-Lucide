@@ -15,37 +15,39 @@ pip install flask-lucide
 
 ## Quick Start
 
-Firstly, initialise the extension within your Flask context
+Firstly, initialize the extension within your Flask context
 
 ```python
-from flask_feather import Feather
-feather = Feather(app)
+from flask_lucide import Lucide
+lucide = Lucide(app)
 ```
 
-This extension also supports the [Flask application factory pattern](http://flask.pocoo.org/docs/latest/patterns/appfactories/) by allowing you to create a Feather object and then initialised it separately for an app:
+This extension also supports the [Flask application factory pattern](http://flask.pocoo.org/docs/latest/patterns/appfactories/) by allowing you to create a Lucide object and then initialized it separately for an app:
 
 ```python
-feather = Feather()
+lucide = Lucide()
+
 
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
 
-    feather.init_app(app)
+    lucide.init_app(app)
 ```
 
 ### Advanced setup
 
-In addition to the wonderful icons provided in the feather set, you can supply your own svg icons, to attempt to parse them and use them in the same format. Simply initialise the extension with a directory containing .svg files that are similar in style to the feather ones. They should resemble the feather icon style as near as possible - any significant differences in formatting/structure may result in unexpected errors.
+In addition to the wonderful icons provided in the lucide set, you can supply your own svg icons, to attempt to parse them and use them in the same format. Simply initialize the extension with a directory containing .svg files that are similar in style to the lucide ones. They should resemble the lucide icon style as near as possible - any significant differences in formatting/structure may result in unexpected errors.
 
 ```python
-feather = Feather(import_dir='app\\static\\customsvg')
+lucide = Lucide(import_dir='app\\static\\customsvg')
+
 
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
 
-    feather.init_app(app)
+    lucide.init_app(app)
 ```
 
 ## Usage
@@ -62,7 +64,7 @@ If the property you're modifying has a hyphen, use an underscore instead. You ca
 <p>{{ lucide.icon('icon-name', stroke_width=2) }}</p>
 ```
 
-The `icon` function takes the SVG source from the Feather project, applies additional attributes and return the SVG tag.
+The `icon` function takes the SVG source from the Lucide project, applies additional attributes and return the SVG tag.
 
 ## Performance
 
