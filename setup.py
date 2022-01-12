@@ -47,7 +47,7 @@ testing_extras = []
 
 setup(
     name='flask-lucide',
-    version='0.1.4',
+    version='0.2.0',
     options={'bdist_wheel': {'universal': True}},
     author='Wouter Kayser',
     author_email='wouterkayser@gmail.com',
@@ -58,7 +58,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/WAKayser/flask-lucide',
-    package_dir= {'':'src'},
+    package_dir={'': 'src'},
     packages=find_packages(where='src'),
     include_package_data=True,
     install_requires=install_requires,

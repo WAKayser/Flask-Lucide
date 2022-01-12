@@ -1,9 +1,9 @@
 from flask import Flask, render_template_string
 from flask_lucide import Lucide, icons
-from os import path
+from pathlib import Path
 
 app = Flask(__name__)
-lucide = Lucide(app, import_dir=path.join('test', 'customsvg'))
+lucide = Lucide(app, import_dir=Path('test') / 'customsvg')
 
 
 def test_simple():
